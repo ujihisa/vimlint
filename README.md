@@ -4,7 +4,9 @@ A lint for Vim script
 
 ## Usage
 
-FIXME
+    $ vimlint a.vim
+
+`vimlint` command is under `bin/`
 
 ## License
 

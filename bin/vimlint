@@ -1,0 +1,2 @@
+#!/bin/sh
+exec lein run "$@"
