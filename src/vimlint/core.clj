@@ -15,6 +15,11 @@
         :let [[_ fname args] (re-matches #"(\w+)(.*)" line)]]
     {:fname fname :args args}))
 
+(defn read-list-vim-commands []
+  (for [line (s/split-lines (slurp "resources/commands.dict"))
+        :let [[_ cname _ args] (re-matches #"(\w+)(\s*;\s*)(.*)" line)]]
+    {:cname cname :args args}))
+
 (defn indentation [lines depth]
   ; TODO: use depth
   (every? #(re-find #"^$|^[^\t]+" %) lines))
@@ -37,7 +42,7 @@
 (def ^:dynamic *verbose* true)
 
 (defn -main [fname]
-  #_(prn (read-list-vim-functions))
+  (prn (read-list-vim-commands))
   (let [lines (s/split-lines (slurp fname))]
     "just check indentation for now"
     (if (indentation lines 2)
