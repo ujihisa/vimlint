@@ -20,9 +20,9 @@
   (every? #(re-find #"^$|^[^\t]+" %) lines))
 
 (def vim-expr
-  (<$> (fn [x]
-         [:number x])
-       number))
+  (choice [(<$> (fn [x] [:number x])
+                number)
+           #_(TODO)]))
 
 (def vim-command
   (<$> (fn [cmdname _ expr]
