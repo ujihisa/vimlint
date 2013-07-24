@@ -42,7 +42,7 @@
 (def ^:dynamic *verbose* true)
 
 (defn -main [fname]
-  (prn (read-list-vim-commands))
+  #_(prn (read-list-vim-commands))
   (let [lines (s/split-lines (slurp fname))]
     "just check indentation for now"
     (if (indentation lines 2)
