@@ -1,5 +1,14 @@
 (ns vimlint.core
-  (:require [clojure.string :as s]))
+  (:require [clojure.string :as s]
+            [zetta.core :as z])
+  (:use [zetta.core :only [<$> <* *>]])
+  (:use
+    [zetta.combinators
+      :only
+      [sep-by around many many1 choice]]
+    [zetta.parser.seq
+      :only
+      [string not-char number whitespace]]))
 
 (defn read-list-vim-functions []
   (for [line (s/split-lines (slurp "resources/functions.dict"))
