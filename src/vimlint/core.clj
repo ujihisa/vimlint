@@ -34,8 +34,14 @@
 (defn parse [vim-str]
   (:result (z/parse-once vim-command vim-str)))
 
+(def *verbose*
+  true)
+
 (defn -main [fname]
-  (prn (read-list-vim-functions))
-  #_(let [lines (s/split-lines (slurp fname))]
+  #_(prn (read-list-vim-functions))
+  (let [lines (s/split-lines (slurp fname))]
     "just check indentation for now"
-    (prn (indentation lines 2))))
+    (if (indentation lines 2)
+      (when *verbose*
+        (prn "ok"))
+      (prn "wrong indentation"))))
