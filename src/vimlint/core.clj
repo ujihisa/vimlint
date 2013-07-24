@@ -21,7 +21,7 @@
 
 (def vim-command
   (<$> (fn [cmdname _ expr]
-         [:command cmdname [:number expr]])
+         [:command cmdname [:number (Integer/parseInt expr)]])
        (string "echo")
        (many1 whitespace)
        (string "123")))
