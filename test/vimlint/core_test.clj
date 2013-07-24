@@ -3,5 +3,5 @@
             [vimlint.core :refer :all]))
 
 (deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+  (testing "trivial echo command with literals"
+    (is (= (vimlint.core/parse "echo 123") [:command "echo" [:number 123]]))))

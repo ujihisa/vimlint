@@ -19,6 +19,10 @@
   ; TODO: use depth
   (every? #(re-find #"^$|^[^\t]+" %) lines))
 
+(defn parse [vim-str]
+  "dummy"
+  [:command "echo" [:number 123]])
+
 (defn -main [fname]
   (prn (read-list-vim-functions))
   #_(let [lines (s/split-lines (slurp fname))]
