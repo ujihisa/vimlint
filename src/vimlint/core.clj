@@ -1,7 +1,7 @@
 (ns vimlint.core
   (:require [clojure.string :as s]
             [zetta.core :as z])
-  (:use [zetta.core :only [<$> <* *>]])
+  (:use [zetta.core :only [<$> <* *> >>]])
   (:use
     [zetta.combinators
       :only
@@ -19,9 +19,15 @@
   ; TODO: use depth
   (every? #(re-find #"^$|^[^\t]+" %) lines))
 
+(def vim-command
+  (<$> (fn [cmdname _ expr]
+         [:command cmdname [:number expr]])
+       (string "echo")
+       (many1 whitespace)
+       (string "123")))
+
 (defn parse [vim-str]
-  "dummy"
-  [:command "echo" [:number 123]])
+  (:result (z/parse-once vim-command vim-str)))
 
 (defn -main [fname]
   (prn (read-list-vim-functions))
