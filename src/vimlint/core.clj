@@ -19,12 +19,17 @@
   ; TODO: use depth
   (every? #(re-find #"^$|^[^\t]+" %) lines))
 
+(def vim-expr
+  (<$> (fn [x]
+         [:number x])
+       number))
+
 (def vim-command
   (<$> (fn [cmdname _ expr]
-         [:command cmdname [:number (Integer/parseInt expr)]])
+         [:command cmdname expr])
        (string "echo")
        (many1 whitespace)
-       (string "123")))
+       vim-expr))
 
 (defn parse [vim-str]
   (:result (z/parse-once vim-command vim-str)))
