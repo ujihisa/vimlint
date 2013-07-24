@@ -34,8 +34,7 @@
 (defn parse [vim-str]
   (:result (z/parse-once vim-command vim-str)))
 
-(def *verbose*
-  true)
+(def ^:dynamic *verbose* true)
 
 (defn -main [fname]
   #_(prn (read-list-vim-functions))
